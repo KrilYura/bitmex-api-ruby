@@ -57,6 +57,11 @@ module Bitmex
       rest.post order_path, params: params
     end
 
+    def bulk_create(symbol, attributes)
+      params = attributes.map{|attrs| attrs.merge symbol: symbol}
+      rest.post order_path('bulk'), params: {orders: params}
+    end
+
     # Cancel an order
     # @param text [String] Optional cancellation annotation. e.g. 'Spread Exceeded'.
     # @return [Bitmex::Mash] the canceled order
