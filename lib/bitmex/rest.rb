@@ -90,9 +90,9 @@ module Bitmex
       raise Bitmex::ForbiddenError, response.body unless response.success?
 
       if response.parsed_response.is_a? Array
-        response.to_a.map { |s| Bitmex::Mash.new s }
+        response.to_a.map { |s| Bitmex::Mash.new s, self }
       else
-        Bitmex::Mash.new response
+        Bitmex::Mash.new response, self
       end
     end
 
