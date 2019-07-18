@@ -73,6 +73,14 @@ module Bitmex
       end
     end
 
+    def bulk_cancel(ids)
+      params = { orderID: ids }
+      rest.delete order_path, params: params do |response|
+        # a single order only
+        response_handler(response)
+      end
+    end
+
     private
 
     def order_path(action = '')
